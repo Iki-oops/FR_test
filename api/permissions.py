@@ -14,5 +14,4 @@ class AnonWithCookie(permissions.BasePermission):
         return (
             request.session.test_cookie_worked()
             and request.method in permissions.SAFE_METHODS
-            or request.user.is_superuser
         )

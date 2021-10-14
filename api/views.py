@@ -45,7 +45,7 @@ def get_answers(request):
 
 
 @api_view(['POST'])
-def login(request):
+def get_token(request):
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user_auth = authenticate(

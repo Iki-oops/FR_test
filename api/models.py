@@ -1,8 +1,4 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-
-
-User = get_user_model()
 
 
 class Question(models.Model):
@@ -101,12 +97,6 @@ class Answer(models.Model):
 
 
 class UserAnswer(models.Model):
-    # user = models.ForeignKey(
-    #     User,
-    #     related_name='answers',
-    #     on_delete=models.CASCADE,
-    #     verbose_name='Пользователь',
-    # )
     user = models.PositiveIntegerField(
         verbose_name='Id анонимного пользователя'
     )
