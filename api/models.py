@@ -101,11 +101,14 @@ class Answer(models.Model):
 
 
 class UserAnswer(models.Model):
-    user = models.ForeignKey(
-        User,
-        related_name='answers',
-        on_delete=models.CASCADE,
-        verbose_name='Пользователь',
+    # user = models.ForeignKey(
+    #     User,
+    #     related_name='answers',
+    #     on_delete=models.CASCADE,
+    #     verbose_name='Пользователь',
+    # )
+    user = models.PositiveIntegerField(
+        verbose_name='Id анонимного пользователя'
     )
     answer = models.ForeignKey(
         Answer,

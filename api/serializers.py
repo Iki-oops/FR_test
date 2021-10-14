@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Answer, Poll, PollQuestion, Question, User, UserAnswer
+from .models import Answer, Poll, PollQuestion, Question, UserAnswer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -21,14 +21,17 @@ class PollSerializer(serializers.ModelSerializer):
         questions = validated_data.pop('questions')
         poll, status = Poll.objects.get_or_create(**validated_data)
         for question in questions:
-            current_question, status = Question.objects.get_or_create(**question)
-            PollQuestion.objects.create(poll=poll, question=current_question)
+            curr_question, status = Question.objects.get_or_create(**question)
+            PollQuestion.objects.create(poll=poll, question=curr_question)
         return poll
 
     def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.end_date = validated_data.get('end_date', instance.end_date)
-        instance.description = validated_data.get('description', instance.description)
+        instance.name = validated_data.get(
+            'name', instance.name)
+        instance.end_date = validated_data.get(
+            'end_date', instance.end_date)
+        instance.description = validated_data.get(
+            'description', instance.description)
         questions = validated_data.get('questions')
         if questions:
             questions = [
@@ -72,3 +75,8 @@ class UserAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAnswer
         fields = ('pk', 'poll', 'question', 'answer')
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
