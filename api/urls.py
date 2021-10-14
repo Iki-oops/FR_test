@@ -38,7 +38,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('get_token/', get_token),
+    path('get-token/', get_token),
     path('start-polling/', start_polling),
     path('delete-test-cookie/', delete_test_cookie),
     path('answers/', get_answers),
