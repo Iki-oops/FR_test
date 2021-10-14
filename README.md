@@ -43,6 +43,17 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 * Приложение будет доступно по адресу: http://localhost:8000/
-### Получение токена авторизованного пользователя
-* Request method: POST
-* URL: http://localhost:8000/api/v1/get-token
+
+## Пользовательские роли
+### Аноним может:
+* Получить все списки опросов
+* Проходить в любом количестве опросы анонимно
+* Получить все вопросы, на которые ответил пользователь (http://localhost:8000/api/v1/poll/{poll_id}/questions/{question_id}/answer/)
+> Но для этого нужно получить cookie http://localhost:8000/api/v1/start-polling/
+### Администратор может:
+* Авторизироваться в системе. Атрибуты: username, password (http://localhost:8000/api/v1/get-token/)
+* Добавить/изменить/удалить опросы. Атрибуты опроса: name, start_date, end_date, description, questions. После создания поле "дата старта" у опроса менять нельзя (http://localhost:8000/api/v1/poll/)
+* Добавить/изменить/удалить вопросы в опросе. Атрибуты вопросов: text, type (http://localhost:8000/api/v1/poll/{poll_id}/questions/)
+
+## Стек технологий
+Python 3, Django 2.2.10, Django REST Framework, SQLite, Simple-JWT
